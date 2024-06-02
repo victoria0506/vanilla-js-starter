@@ -50,17 +50,18 @@
     height: 80px;
     border-radius: 300px;
     margin-left: 25px;
+    text-align: center;
+    
 }
 
 .lista{
-    border: solid 1px grey;
+    border: solid 2px grey;
     border-radius: 4px;
     padding: 10px;
     min-height: 500px;
     min-width: 305%;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    
+    flex-direction: column;
 }
+
 
