@@ -1,15 +1,35 @@
 <!DOCTYPE html>
 <html>
-
 <head>
 	<title>Ejemplo básico</title>
 	<meta charset="UTF-8" />
 </head>
-
+ <link rel="stylesheet" href="css/style.css">
 <body>
-	<h1>La aplicación esta corriendo!</h1>
 
-	<script src="./index.js" type="module"></script>
+	<div class="titulo"><h1>Tareas por hacer</h1></div>
+
+	<div class="contenedor">
+
+		<div class="botones">
+			<input type="text" placeholder="Ingresar tarea" id="tarea">
+			<br><br>
+			<button class="agregar" id="agregar">Agregar</button>
+		</div>
+
+		<div class="contador">
+			<p class="tareas">Tareas Completadas</p>
+			<p class="cantidad" id="cantidad"></p>
+		</div>
+        
+		
+		<div class="lista" id="lista"></div>
+
+	</div>
+
+
+
+	<script src="javascript/index.js" type="module"></script>
 </body>
 
 </html>
