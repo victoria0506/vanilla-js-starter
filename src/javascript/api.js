@@ -1,15 +1,15 @@
 
-/*
+
 async function obtenerTareas() {
     try{
         const api = await fetch('http://localhost:3000/api/task')
         const data = await api.json()
         return data
-    }catch(error){ console.error(error)}
+    }catch(error){
+         console.error(error)
+    }
 }
-
-
-const asyncPostCall = async () => {
+const postTareas = async (tarea) => { 
     try {
         const response = await fetch('http://localhost:3000/api/task', {
         method: 'POST',
@@ -17,15 +17,32 @@ const asyncPostCall = async () => {
             'Content-Type': 'application/json'
         },
             body: JSON.stringify({
-            tarea: "Tarea",
+            tarea: tarea,
             })
         });
-          const data = await response.json();
+        const data = await response.json();
         console.log(data);
         } catch(error) {
         console.log(error)
     } 
 }
 
-asyncPostCall()
-*/
+const getTareas = async (tarea) => { 
+    try {
+        const response = await fetch('http://localhost:3000/api/task', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+            body: JSON.stringify({
+            tarea: tarea,
+            })
+        });
+        const data = await response.json();
+        console.log(data);
+        } catch(error) {
+        console.log(error)
+    } 
+}
+
+export {obtenerTareas,postTareas}
