@@ -59,6 +59,7 @@
     padding: 10px;
     min-height: 500px;
     min-width: 305%;
+    
 }
 
 .check{
@@ -69,6 +70,19 @@
     display: grid;
     border: solid 2px black;
     border-radius: 3px;
+    margin-top: 1.5%;
     display: flex;
+    justify-content: space-between;
+    text-align: center;
+}
+
+#mensaje{
+    text-align: center;
+    margin-top: 18%;
+    font-size: 25px;
+}
+
+.icon{
+    margin-top: 10px;
 }
 
