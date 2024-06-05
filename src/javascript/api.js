@@ -1,5 +1,5 @@
 
-
+/*
 async function obtenerTareas() {
     try{
         const api = await fetch('http://localhost:3000/api/task')
@@ -9,6 +9,7 @@ async function obtenerTareas() {
          console.error(error)
     }
 }
+*/
 const postTareas = async (tarea) => { 
     try {
         const response = await fetch('http://localhost:3000/api/task', {
@@ -21,28 +22,28 @@ const postTareas = async (tarea) => {
             })
         });
         const data = await response.json();
-        console.log(data);
+        //console.log(data);
         } catch(error) {
         console.log(error)
     } 
 }
 
-const getTareas = async (tarea) => { 
+const getTareas = async () => { 
     try {
         const response = await fetch('http://localhost:3000/api/task', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
         },
-            body: JSON.stringify({
-            tarea: tarea,
-            })
         });
         const data = await response.json();
-        console.log(data);
+        return(data)
         } catch(error) {
         console.log(error)
     } 
 }
 
-export {obtenerTareas,postTareas}
+
+
+
+export {postTareas,getTareas}
