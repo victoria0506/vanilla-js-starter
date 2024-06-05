@@ -1,6 +1,6 @@
 // Inserte el código aquí
 
-import { obtenerTareas,postTareas } from "./api.js"
+import { postTareas,getTareas } from "./api.js"
 
 
 let bntAgregar = document.getElementById("agregar")
@@ -8,39 +8,62 @@ let input = document.getElementById("tarea")
 let lista = document.getElementById("lista")
 let contador = document.getElementById("cantidad")
 
+obtenerPromesa()
 
-bntAgregar.addEventListener("click", function (){
+async function obtenerPromesa() {
+   
+    let promesaObtenida= await getTareas()
 
-    if (input.value != "" ) {
-    
-    let div = document.createElement("div")
-    lista.appendChild(div)
-    div.className =  "container"
-    console.log(div);
-    let btnCheck = document.createElement("input")
-    btnCheck.type = "checkbox"
-    btnCheck.className = "check"
-     div.appendChild(btnCheck)
-    
-    btnCheck.addEventListener("click", function() {
-        contador.innerHTML++
-    })
-    
+    console.log(promesaObtenida)
+
     let parrafo = document.createElement("p")
-    parrafo.className = "parrafo"
-    div.appendChild(parrafo).innerHTML = input.value
-    let icon =document.createElement("span")
-    icon.textContent = "🗑️"
-    icon.className = "icon"
-    div.appendChild(icon)
-    postTareas(input.value)
+    let div = document.createElement("div")
 
-    verMjs()
+    promesaObtenida.forEach(tareas => {
+        parrafo.innerHTML = tareas.tarea
+        lista.appendChild(parrafo)
+    });
+}
 
-    }else{
-        alert("Ingrese un texto")
-    }
-})
+
+function click() {
+    bntAgregar.addEventListener("click", function (){
+
+        if (input.value != "" ) {
+        
+        let div = document.createElement("div")
+        lista.appendChild(div)
+        div.className =  "container"
+     
+    
+        let btnCheck = document.createElement("input")
+        btnCheck.type = "checkbox"
+        btnCheck.className = "check"
+        div.appendChild(btnCheck)
+        
+        btnCheck.addEventListener("click", function() {
+            contador.innerHTML++
+        })
+        
+        let parrafo = document.createElement("p")
+        parrafo.className = "parrafo"
+        div.appendChild(parrafo).innerHTML = input.value
+        
+        let icon =document.createElement("span")
+        icon.textContent = "🗑️"
+        icon.className = "icon"
+        div.appendChild(icon)
+
+        postTareas(input.value)
+
+        verMjs()
+    
+        }else{
+            alert("Ingrese un texto")
+        }
+    })
+}click()
+
 
 
 
@@ -69,10 +92,12 @@ function enter() {
                 div.appendChild(parrafo).innerHTML = input.value
         
                 let icon =document.createElement("span")
-                icon.textContent = "🗑️"
+                icon.textContent = "🗑"
                 icon.className = "icon"
                 div.appendChild(icon)
+
                 postTareas(input.value)
+                getTareas()
 
                 verMjs()
             }else{
