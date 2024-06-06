@@ -34,7 +34,7 @@ const getTareas = async () => {
 
 const putTareas = async (tareaId, nuevaTarea) => { 
     try {
-        const response = await fetch('http://localhost:3000/api/task', {
+        const response = await fetch('http://localhost:3000/api/task'+ tareaId, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -49,5 +49,21 @@ const putTareas = async (tareaId, nuevaTarea) => {
     } 
 }
 
+const deleteTareas = async (id) => { 
+    try {
+        const response = await fetch('http://localhost:3000/api/task' + id, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+            body: JSON.stringify({
+            tarea: tarea,
+            })
+        });
+        const data = await response.json();
+        } catch(error) {
+        console.log(error)
+    } 
+}
 
 export {postTareas,getTareas,putTareas}
