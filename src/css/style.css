@@ -59,7 +59,6 @@
     padding: 10px;
     min-height: 500px;
     min-width: 305%;
-    
 }
 
 .check{
@@ -69,7 +68,7 @@
 .container{
     display: grid;
     border: solid 2px black;
-    border-radius: 3px;
+    border-radius: 4px;
     margin-top: 1.5%;
     display: flex;
     justify-content: space-between;
@@ -81,10 +80,13 @@
     margin-top: 18%;
     font-size: 25px;
 }
-
-.icon{
-    margin-top: 10px;
+.parrafo{
+    font-size: 20px;
 }
-li{
-    list-style-type: none;
+.icon{
+    margin-top: 18px;
+}
+
+#editar{
+   border-color: white;
 }

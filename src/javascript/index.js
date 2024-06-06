@@ -1,7 +1,6 @@
 // Inserte el código aquí
 
-import { postTareas,getTareas } from "./api.js"
-
+import { postTareas,getTareas,putTareas} from "./api.js"
 
 let bntAgregar = document.getElementById("agregar")
 let input = document.getElementById("tarea")
@@ -13,99 +12,83 @@ obtenerPromesa()
 async function obtenerPromesa() {
    
     let promesaObtenida= await getTareas()
-
     console.log(promesaObtenida)
 
-    let parrafo = document.createElement("p")
     let div = document.createElement("div")
+    div.className =  "container"
+
+    let btnCheck = document.createElement("input")
+    btnCheck.type = "checkbox"
+    btnCheck.className = "check"
+
+    btnCheck.addEventListener("click",function() {
+        contador.innerHTML++
+    })
+
+    let parrafo = document.createElement("p")
+    parrafo.className = "parrafo"
+
+    let icon =document.createElement("span")
+    icon.textContent = "🗑️"
+    icon.className = "icon"
+
+    let btnEditar = document.createElement("button")
+    btnEditar.id = "editar"
+    btnEditar.textContent = "Editar"
+
+    lista.appendChild(div)
 
     promesaObtenida.forEach(tareas => {
-        parrafo.innerHTML = tareas.tarea
-        lista.appendChild(parrafo)
+       div.appendChild(parrafo).innerHTML = input.value
+       div.appendChild(parrafo).innerHTML = tareas.tarea
     });
+    
+    div.appendChild(btnCheck)
+    div.appendChild(icon)
+    div.appendChild(btnEditar)
 }
 
 
 function click() {
-    bntAgregar.addEventListener("click", function (){
+    bntAgregar.addEventListener("click", function() {
+        if (input.value != "") {
+            obtenerPromesa()
+            postTareas(input.value)
 
-        if (input.value != "" ) {
-        
-        let div = document.createElement("div")
-        lista.appendChild(div)
-        div.className =  "container"
-     
-    
-        let btnCheck = document.createElement("input")
-        btnCheck.type = "checkbox"
-        btnCheck.className = "check"
-        div.appendChild(btnCheck)
-        
-        btnCheck.addEventListener("click", function() {
-            contador.innerHTML++
-        })
-        
-        let parrafo = document.createElement("p")
-        parrafo.className = "parrafo"
-        div.appendChild(parrafo).innerHTML = input.value
-        
-        let icon =document.createElement("span")
-        icon.textContent = "🗑️"
-        icon.className = "icon"
-        div.appendChild(icon)
-
-        postTareas(input.value)
-
-        verMjs()
-    
+            verMjs()
         }else{
-            alert("Ingrese un texto")
+            alert("Ingrese texto")
         }
     })
 }click()
 
-
-
-
-function enter() {
+function Enter() {
     input.addEventListener("keypress", function(event) {
         if (event.key === "Enter") {
-    
             if (input.value != "") {
-    
-                let div = document.createElement("div")
-                lista.appendChild(div)
-                div.className =  "container"
-                console.log(div);
-        
-                let btnCheck = document.createElement("input")
-                btnCheck.type = "checkbox"
-                btnCheck.className = "check"
-                div.appendChild(btnCheck)
-        
-                btnCheck.addEventListener("click", function() {
-                    contador.innerHTML++
-                })
-                
-                let parrafo = document.createElement("p")
-                parrafo.className = "parrafo"
-                div.appendChild(parrafo).innerHTML = input.value
-        
-                let icon =document.createElement("span")
-                icon.textContent = "🗑"
-                icon.className = "icon"
-                div.appendChild(icon)
-
+                obtenerPromesa()
                 postTareas(input.value)
-                getTareas()
-
                 verMjs()
-            }else{
-                alert("Ingrese un texto")
+            } else {
+                alert("Ingrese texto")
             }
         }
     })
-}enter()
+}Enter()
+
+/*
+let btnEditar = document.createElement("button")
+btnEditar.id = "editar"
+function editarTarea() {
+    let tareaId = 234
+    let nuevaTarea = input.value
+    putTareas(tareaId, nuevaTarea)
+
+    btnEditar.addEventListener("click", editarTarea)
+    console.log("holaa");
+}editarTarea()
+*/
+
 
 let mensaje = document.getElementById("mensaje")
 function verMjs() {
