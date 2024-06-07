@@ -86,6 +86,9 @@
 .icon{
     margin-top: 2px;
     border-color: white;
+    background-color: white;
+    border: none;
+    font-size: 20px;
 }
 
 #editar{

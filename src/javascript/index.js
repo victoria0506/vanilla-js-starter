@@ -27,14 +27,15 @@ async function obtenerPromesa() {
        btnCheck.className = "check"
        btnCheck.checked = tareas.checked
 
+
         btnCheck.addEventListener("click",function() {
            if(btnCheck.checked) {
             contador.innerHTML++
            }else{
             contador.innerHTML--
            }
-           promesaObtenida()
-           postTareas(btnCheck.checked)
+           console.log(btnCheck.checked);
+           getTareas(tareas.id,btnCheck.checked)
         })
    
        let parrafo = document.createElement("p")
@@ -56,14 +57,13 @@ async function obtenerPromesa() {
         btnEditar.onclick = function() {
            let respu = confirm("Desea editar tarea")
             if (respu) {
-              let modal = document.getElementById("alert-dialog")
-              modal.show()
-              inputModal.value = tareas.tarea
-
-            btncambiar.addEventListener("click", function() {
+                let modal = document.getElementById("alert-dialog")
+                modal.show()
+                inputModal.value = tareas.tarea
+                btncambiar.addEventListener("click", function() {
                 putTareas(tareas.id, inputModal.value, tareas.tarea)
                 window.location.reload()
-            })
+              })
             }
         }
 
@@ -78,20 +78,19 @@ async function obtenerPromesa() {
     });
     verMjs()
 }
-
 function click() {
     bntAgregar.addEventListener("click", function() {
         if (input.value != "") {
             postTareas(input.value)
             obtenerPromesa()
             verMjs()
+            window.location.reload()
             input.value = ""
         }else{
             alert("Ingrese texto")
         }
     })
 }click()
-
 function Enter() {
     input.addEventListener("keypress", function(event) {
         if (event.key === "Enter") {
@@ -106,7 +105,6 @@ function Enter() {
         }
     })
 }Enter()
-
 function verMjs() {
     if (lista.children.length === 0) {
         let texto = document.createElement("p")

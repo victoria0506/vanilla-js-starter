@@ -1,5 +1,5 @@
 
-const postTareas = async (tarea, checked = false) => { 
+const postTareas = async (tarea, checked) => { 
     try {
         const response = await fetch('http://localhost:3000/api/task', {
         method: 'POST',
