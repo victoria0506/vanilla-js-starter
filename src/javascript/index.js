@@ -1,5 +1,5 @@
 // Inserte el código aquí
-import { postTareas,getTareas,putTareas} from "./api.js"
+import { postTareas,getTareas,putTareas,deleteTareas} from "./api.js"
 
 let bntAgregar = document.getElementById("agregar")
 let input = document.getElementById("tarea")
@@ -17,6 +17,7 @@ async function obtenerPromesa() {
     let promesaObtenida= await getTareas()
     console.log(promesaObtenida)
     lista.innerHTML = ""
+    contador.innerHTML = 0
 
     promesaObtenida.forEach(tareas => {
 
@@ -26,10 +27,17 @@ async function obtenerPromesa() {
        let btnCheck = document.createElement("input")
        btnCheck.type = "checkbox"
        btnCheck.className = "check"
-   
+       btnCheck.checked = tareas.checked
+
        btnCheck.addEventListener("click",function() {
-           contador.innerHTML++
-       })
+
+           if (btnCheck.checked) {
+            contador.innerHTML++
+           }else{
+            contador.innerHTML--
+           }
+           promesaObtenida()
+        })
    
        let parrafo = document.createElement("p")
        parrafo.className = "parrafo"
@@ -38,23 +46,29 @@ async function obtenerPromesa() {
        icon.textContent = "🗑️"
        icon.className = "icon"
 
-       icon.onclick = function() {
-       
-       }
+        icon.onclick = async function() {
+           await deleteTareas(tareas.id)
+           obtenerPromesa()
+        }
    
        let btnEditar = document.createElement("button")
        btnEditar.id = "editar"
        btnEditar.textContent = "Editar"
 
-       btnEditar.onclick = function() {
+       btnEditar.onclick = async function(Id, tareaEdi) {
         let respu = confirm("Desea editar tarea")
         if (respu) {
             let modal = document.getElementById("alert-dialog")
             modal.show()
+            inputModal.value = tareas.tarea
+            await putTareas(Id, tareaEdi)
         }
       };
-       
-      btncambiar.addEventListener("click", function() {
+
+      btncambiar.addEventListener("click",async function() {
+      div.appendChild(parrafo).innerHTML = inputModal.value
+      await putTareas(tareas.Id, tareaEdi)
+      obtenerPromesa()
       })
 
        lista.appendChild(div)
@@ -64,13 +78,13 @@ async function obtenerPromesa() {
        div.id= tareas.id
        div.appendChild(icon)
        div.appendChild(btnEditar)
+
     });
 }
 
 function click() {
     bntAgregar.addEventListener("click", function() {
         if (input.value != "") {
-            //confirm("Desea agregar tarea")
             postTareas(input.value)
             obtenerPromesa()
             verMjs()
@@ -84,7 +98,6 @@ function Enter() {
     input.addEventListener("keypress", function(event) {
         if (event.key === "Enter") {
             if (input.value != "") {
-                //confirm("Desea agregar tarea")
                 postTareas(input.value)
                 obtenerPromesa()
                 verMjs()
@@ -96,12 +109,12 @@ function Enter() {
 }Enter()
 
 let mensaje = document.getElementById("mensaje")
+
 function verMjs() {
     if (lista.children.length === 0) {
         mensaje.style.display = "block"
     }else{
         mensaje.style.display = "none"
     }
-}
-
+}verMjs()
 
