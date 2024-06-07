@@ -31,15 +31,15 @@ const getTareas = async () => {
     } 
 }
 
-const putTareas = async (Id, tareaEdi) => { 
+const putTareas = async (id, tarea) => { 
     try {
-        const response = await fetch('http://localhost:3000/api/task/'+ Id, {
+        const response = await fetch('http://localhost:3000/api/task/' + id, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
         },
             body: JSON.stringify({
-            tarea: tareaEdi,
+            tarea: tarea,
             })
         });
         const data = await response.json();

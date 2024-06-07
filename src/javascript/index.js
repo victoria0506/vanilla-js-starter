@@ -5,10 +5,8 @@ let bntAgregar = document.getElementById("agregar")
 let input = document.getElementById("tarea")
 let lista = document.getElementById("lista")
 let contador = document.getElementById("cantidad")
-
 let inputModal = document.getElementById("tareaEdi")
 let btncambiar = document.getElementById("cambiar")
-console.log(btncambiar);
 
 obtenerPromesa()
 
@@ -29,14 +27,14 @@ async function obtenerPromesa() {
        btnCheck.className = "check"
        btnCheck.checked = tareas.checked
 
-       btnCheck.addEventListener("click",function() {
-
-           if (btnCheck.checked) {
+        btnCheck.addEventListener("click",function() {
+           if(btnCheck.checked) {
             contador.innerHTML++
            }else{
             contador.innerHTML--
            }
            promesaObtenida()
+           postTareas(btnCheck.checked)
         })
    
        let parrafo = document.createElement("p")
@@ -46,8 +44,8 @@ async function obtenerPromesa() {
        icon.textContent = "🗑️"
        icon.className = "icon"
 
-        icon.onclick = async function() {
-           await deleteTareas(tareas.id)
+        icon.onclick = function() {
+           deleteTareas(tareas.id)
            obtenerPromesa()
         }
    
@@ -55,21 +53,19 @@ async function obtenerPromesa() {
        btnEditar.id = "editar"
        btnEditar.textContent = "Editar"
 
-       btnEditar.onclick = async function(Id, tareaEdi) {
-        let respu = confirm("Desea editar tarea")
-        if (respu) {
-            let modal = document.getElementById("alert-dialog")
-            modal.show()
-            inputModal.value = tareas.tarea
-            await putTareas(Id, tareaEdi)
-        }
-      };
+        btnEditar.onclick = function() {
+           let respu = confirm("Desea editar tarea")
+            if (respu) {
+              let modal = document.getElementById("alert-dialog")
+              modal.show()
+              inputModal.value = tareas.tarea
 
-      btncambiar.addEventListener("click",async function() {
-      div.appendChild(parrafo).innerHTML = inputModal.value
-      await putTareas(tareas.Id, tareaEdi)
-      obtenerPromesa()
-      })
+            btncambiar.addEventListener("click", function() {
+                putTareas(tareas.id, inputModal.value, tareas.tarea)
+                window.location.reload()
+            })
+            }
+        }
 
        lista.appendChild(div)
        div.appendChild(btnCheck)
@@ -80,6 +76,7 @@ async function obtenerPromesa() {
        div.appendChild(btnEditar)
 
     });
+    verMjs()
 }
 
 function click() {
@@ -88,6 +85,7 @@ function click() {
             postTareas(input.value)
             obtenerPromesa()
             verMjs()
+            input.value = ""
         }else{
             alert("Ingrese texto")
         }
@@ -101,6 +99,7 @@ function Enter() {
                 postTareas(input.value)
                 obtenerPromesa()
                 verMjs()
+                input.value = ""
             } else {
                 alert("Ingrese texto")
             }
@@ -108,13 +107,12 @@ function Enter() {
     })
 }Enter()
 
-let mensaje = document.getElementById("mensaje")
-
 function verMjs() {
     if (lista.children.length === 0) {
-        mensaje.style.display = "block"
-    }else{
-        mensaje.style.display = "none"
+        let texto = document.createElement("p")
+        texto.className = "texto"
+        lista.appendChild(texto).innerHTML = "No hay tareas"
+        texto.style.display = "block"
     }
-}verMjs()
+}
 
