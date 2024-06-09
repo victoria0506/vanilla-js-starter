@@ -7,6 +7,7 @@ let lista = document.getElementById("lista")
 let contador = document.getElementById("cantidad")
 let inputModal = document.getElementById("tareaEdi")
 let btncambiar = document.getElementById("cambiar")
+let espacio = " "
 
 obtenerPromesa()
 
@@ -27,15 +28,17 @@ async function obtenerPromesa() {
        btnCheck.className = "check"
        btnCheck.checked = tareas.checked
 
-
+       if(btnCheck.checked) {
+         contador.innerHTML++
+       }
         btnCheck.addEventListener("click",function() {
-           if(btnCheck.checked) {
+           putTareas(tareas.id, tareas.tarea, btnCheck.checked)
+           if (btnCheck.checked) {
             contador.innerHTML++
-           }else{
+           } else {
             contador.innerHTML--
            }
-           console.log(btnCheck.checked);
-           getTareas(tareas.id,btnCheck.checked)
+           obtenerPromesa()
         })
    
        let parrafo = document.createElement("p")
@@ -60,10 +63,14 @@ async function obtenerPromesa() {
                 let modal = document.getElementById("alert-dialog")
                 modal.show()
                 inputModal.value = tareas.tarea
-                btncambiar.addEventListener("click", function() {
-                putTareas(tareas.id, inputModal.value, tareas.tarea)
-                window.location.reload()
-              })
+                btncambiar.addEventListener("click", async function() {
+                    if (inputModal.value !== "" && inputModal.value != espacio) { 
+                        await putTareas(tareas.id, inputModal.value, tareas.tarea);
+                        window.location.reload();
+                    } else {
+                        alert("Ingrese texto");
+                    }
+                })
             }
         }
 
@@ -80,11 +87,11 @@ async function obtenerPromesa() {
 }
 function click() {
     bntAgregar.addEventListener("click", function() {
-        if (input.value != "") {
-            postTareas(input.value)
+        if (input.value != "" && input.value != espacio) {
+            postTareas(input.value, false)
             obtenerPromesa()
             verMjs()
-            window.location.reload()
+           window.location.reload()
             input.value = ""
         }else{
             alert("Ingrese texto")
@@ -94,8 +101,8 @@ function click() {
 function Enter() {
     input.addEventListener("keypress", function(event) {
         if (event.key === "Enter") {
-            if (input.value != "") {
-                postTareas(input.value)
+            if (input.value != ""  && input.value != espacio) {
+                postTareas(input.value, false)
                 obtenerPromesa()
                 verMjs()
                 input.value = ""

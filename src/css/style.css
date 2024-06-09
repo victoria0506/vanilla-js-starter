@@ -21,17 +21,23 @@
     border-color: rgb(197, 197, 197);
 }
 
-.agregar{
-    padding: 5px;
-    background-color: #8a2cfe;
-    border-color: #8a2cfe;
-    border-radius: 4px;
-    color: white;
-    border: none;
-    padding: 10px 20px; 
-    display: inline-flex;
-    cursor: pointer;
+button{
+    border: none; 
+    color: white; 
+    padding: 14px 28px; 
+    cursor: pointer; 
+    border-radius: 5px;
 }
+
+button {background-color: #8a2cfe;} 
+button:hover {background: #aa65fe;}
+
+.check{
+    text-align: center;
+    width: -10px;
+}
+
+
 .contador{
     display: grid;
     grid-template-columns: 100px 100px;
@@ -61,10 +67,6 @@
     min-width: 305%;
 }
 
-.check{
-    width: 15px;
-}
-
 .container{
     display: grid;
     border: solid 2px black;
@@ -83,13 +85,9 @@
 .parrafo{
     font-size: 20px;
 }
-.icon{
-    margin-top: 2px;
-    border-color: white;
-    background-color: white;
-    border: none;
-    font-size: 20px;
-}
+
+.icon{background-color: white; border: 2px solid #ff6d62;}
+.icon:hover {background: #ff6d62; color: white;}
 
 #editar{
    border-color: white;

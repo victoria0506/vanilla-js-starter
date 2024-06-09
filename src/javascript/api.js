@@ -7,7 +7,8 @@ const postTareas = async (tarea, checked) => {
             'Content-Type': 'application/json'
         },
             body: JSON.stringify({
-            tarea: tarea, checked
+            tarea: tarea, 
+            checked : checked
             })
         });
         const data = await response.json();
@@ -31,7 +32,7 @@ const getTareas = async () => {
     } 
 }
 
-const putTareas = async (id, tarea) => { 
+const putTareas = async (id, tarea,checked) => { 
     try {
         const response = await fetch('http://localhost:3000/api/task/' + id, {
         method: 'PUT',
@@ -40,6 +41,7 @@ const putTareas = async (id, tarea) => {
         },
             body: JSON.stringify({
             tarea: tarea,
+            checked : checked
             })
         });
         const data = await response.json();
