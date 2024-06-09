@@ -1,5 +1,5 @@
 
-const postTareas = async (tarea, checked) => { 
+const postTareas = async (tarea, checked) => { // funcion del metodo POST
     try {
         const response = await fetch('http://localhost:3000/api/task', {
         method: 'POST',
@@ -17,7 +17,7 @@ const postTareas = async (tarea, checked) => {
     } 
 }
 
-const getTareas = async () => { 
+const getTareas = async () => { // funcion del metodo GET
     try {
         const response = await fetch('http://localhost:3000/api/task/', {
         method: 'GET',
@@ -32,7 +32,7 @@ const getTareas = async () => {
     } 
 }
 
-const putTareas = async (id, tarea,checked) => { 
+const putTareas = async (id, tarea,checked) => { // funcion del metodo PUT
     try {
         const response = await fetch('http://localhost:3000/api/task/' + id, {
         method: 'PUT',
@@ -50,7 +50,7 @@ const putTareas = async (id, tarea,checked) => {
     } 
 }
 
-const deleteTareas = async (id) => { 
+const deleteTareas = async (id) => { // funcion del metodo DELETE
     try {
         const response = await fetch('http://localhost:3000/api/task/' + id, {
         method: 'DELETE',
@@ -64,4 +64,4 @@ const deleteTareas = async (id) => {
     } 
 }
 
-export {postTareas,getTareas,putTareas,deleteTareas}
+export {postTareas,getTareas,putTareas,deleteTareas} // exportamos las funciones al archivo index.js
