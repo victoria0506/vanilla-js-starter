@@ -87,7 +87,7 @@ async function obtenerPromesa() {//
 }
  
 bntAgregar.addEventListener("click", function() { // evento click del boton
-    if (input.value != "" && input.value != espacio) { //  validamos que si el contenido del input es DIFERENTE a VACIO y a la variable espacio se hace lo absignado
+    if (input.value != "" && input.value.trim() != " ") { //  validamos que si el contenido del input es DIFERENTE a VACIO y a la variable espacio se hace lo absignado
         postTareas(input.value, false) // llamamos al metodo POST y le enviamos como aparemetros el input y el estado del boton check
         obtenerPromesa() // llamamos a la funcion del GET
         verMjs() // llamamos a la funcion del mensaje
