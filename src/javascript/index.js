@@ -27,10 +27,14 @@ async function obtenerPromesa() {//
        btnCheck.className = "check" // clase del input
        btnCheck.checked = tareas.checked // estado del input 
 
+        if(btnCheck.checked) { // si el checked es verdadero el contador aumenta
+            contador.innerHTML++ // si el checked es verdadero el contador aumenta
+        }
+
         btnCheck.addEventListener("click",function() { // evento del boton check 
-           putTareas(tareas.id, tareas.tarea, btnCheck.checked) // medoto PUT para cambiar el estado del boton deñl check
+           putTareas(tareas.id, tareas.tarea, btnCheck.checked) // medoto PUT para cambiar el estado del boton de el check
            if (btnCheck.checked) { // si el checked es verdadero el contador aumenta
-            contador.innerHTML++
+            contador.innerHTML++ // si el checked es verdadero el contador aumenta
            } else {
             contador.innerHTML-- // si el checked es falso el contador disminuye
            }
